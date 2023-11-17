@@ -1,3 +1,6 @@
+import { renderHeaderComponent } from "./header-component.js";
+import { posts, goToPage } from "../index.js";
+
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   const render = () => {
     // TODO: Реализовать страницу добавления поста
@@ -20,4 +23,16 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   };
 
   render();
+
+  renderHeaderComponent({
+    element: document.querySelector(".header-container"),
+  });
+
+  for (let userEl of document.querySelectorAll(".post-header")) {
+    userEl.addEventListener("click", () => {
+      goToPage(USER_POSTS_PAGE, {
+        userId: userEl.dataset.userId,
+      });
+    });
+  }
 }
