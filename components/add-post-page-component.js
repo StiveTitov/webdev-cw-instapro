@@ -1,4 +1,5 @@
 import { renderHeaderComponent } from "./header-component.js";
+
 import { posts, goToPage } from "../index.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -47,12 +48,25 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     }
 
     document.getElementById("add-button").addEventListener("click", () => {
-      console.log(uploadImageContainer);
-        console.log(document.getElementById("img-description").value);
+      let fotoDescription = document.getElementById("img-description").value;
+      let imgData= imageUrl;
+        console.log(fotoDescription);
+        console.log(imgData);
       onAddPostClick({
         description: document.getElementById("img-description").value,
         imageUrl: imageUrl,
       });
+      addPostsUser({
+        description: fotoDescription,
+        imageUrl: imageUrl,
+      })
+        //.then((user) => {
+        //  setUser(user.user);
+        //})
+        .catch((error) => {
+          console.warn(error);
+          setError(error.message);
+        });
     });
   };
 
