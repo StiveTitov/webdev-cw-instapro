@@ -21,9 +21,10 @@ import {
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
+export let userId;
 
 export const setPosts = (newPosts) => {
-  posts = newPosts;
+    posts = newPosts;
 };
 
 export const getToken = () => {
@@ -75,7 +76,7 @@ export const goToPage = (newPage, data) => {
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
       console.log("Открываю страницу пользователя: ", data.userId);
-      let userId=data.userId;
+      userId=data.userId;
       page = LOADING_PAGE;
       renderApp();
       return getPostsUser({token: getToken(), userId})
@@ -83,18 +84,14 @@ export const goToPage = (newPage, data) => {
       .then((newPosts) => {
         page = USER_POSTS_PAGE;
         posts = newPosts;
-        console.log(posts)
+        
         renderApp();
       })
       .catch((error) => {
         console.error(error);
         goToPage(POSTS_PAGE);
       });
-      //page = USER_POSTS_PAGE;
-      //console.log(posts);
-      //posts = [];
-     
-      //return renderApp();
+      
     }
 
     page = newPage;
