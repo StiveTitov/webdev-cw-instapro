@@ -1,6 +1,6 @@
 import { renderHeaderComponent } from "./header-component.js";
-
-import { posts, goToPage } from "../index.js";
+import { addPostsUser } from '../api.js';
+import { posts, goToPage, getToken } from "../index.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
@@ -57,6 +57,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
         imageUrl: imageUrl,
       });
       addPostsUser({
+        token: getToken(),
         description: fotoDescription,
         imageUrl: imageUrl,
       })
