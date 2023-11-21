@@ -2,6 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
 import { addLike, disLike, getPosts } from '../api.js';
+import { formatDistanceToNow } from "date-fns";
 
 export let postId;
 

@@ -2,6 +2,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { addPostsUser } from '../api.js';
 import { posts, goToPage, getToken } from "../index.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
+import { sanitizeHtml } from "./sanitizeHtml.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   let imageUrl = "";
@@ -50,15 +51,21 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     document.getElementById("add-button").addEventListener("click", () => {
       let fotoDescription = document.getElementById("img-description").value;
       let imgData= imageUrl;
-        console.log(fotoDescription);
-        console.log(imgData);
+      if (!imgData) {
+        alert("Необходимо добавить фото");
+        return;
+      }
+      if (!fotoDescription) {
+        alert("Необходимо добавить описание фотографии");
+        return;
+      }
       onAddPostClick({
-        description: document.getElementById("img-description").value,
+        description: sanitizeHtml(fotoDescription),
         imageUrl: imageUrl,
       });
       addPostsUser({
         token: getToken(),
-        description: fotoDescription,
+        description: sanitizeHtml(fotoDescription),
         imageUrl: imageUrl,
       })
         //.then((user) => {

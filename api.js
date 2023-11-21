@@ -55,7 +55,7 @@ export function addPostsUser({ token, description, imageUrl }) {
     },
   }).then((response) => {
     if (response.status === 400) {
-      throw new Error("Опесание фотографии не может быть пустым");
+       throw new Error("Опесание фотографии не может быть пустым");
     }
     return response.json();
   });
