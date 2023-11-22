@@ -62,19 +62,16 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       onAddPostClick({
         description: sanitizeHtml(fotoDescription),
         imageUrl: imageUrl,
-      });
-      addPostsUser({
-        token: getToken(),
-        description: sanitizeHtml(fotoDescription),
-        imageUrl: imageUrl,
       })
+     // addPostsUser({
+       // token: getToken(),
+       // description: sanitizeHtml(fotoDescription),
+      // imageUrl: imageUrl,
+      //})
         //.then((user) => {
         //  setUser(user.user);
         //})
-        .catch((error) => {
-          console.warn(error);
-          setError(error.message);
-        });
+        
     });
   };
 

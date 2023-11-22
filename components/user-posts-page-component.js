@@ -1,6 +1,8 @@
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, setPosts, getToken, renderApp, userId } from "../index.js";
-import { addLike, disLike, getPosts, getPostsUser } from '../api.js';
+import { posts, setPosts, getToken, renderApp, userId } from "../index.js";
+import { addLike, disLike, getPostsUser } from '../api.js';
+import { formatDistanceToNow } from "date-fns";
+import { ru } from "date-fns/locale";
 
 export let postId;
 
@@ -14,7 +16,7 @@ export function renderUserPostsPageComponent({ appEl }) {
       imageUrl: post.imageUrl,
       description: post.description,
       userLogin: post.user.login,
-      //date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
+      date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
       likes: post.likes,
       isLiked: post.isLiked,
       id: post.id,

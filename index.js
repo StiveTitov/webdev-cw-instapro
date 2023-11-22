@@ -28,7 +28,9 @@ export const setPosts = (newPosts) => {
 };
 
 export const getToken = () => {
+  
   const token = user ? `Bearer ${user.token}` : undefined;
+  console.log("token:", token);
   return token;
 };
 
@@ -131,11 +133,17 @@ export const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
-        addPostsUser({ token: getToken() , description, imageUrl });
+        addPostsUser({ token: getToken() , description, imageUrl })
+        .catch((error) => {
+      console.warn(error);
+      setError(error.message);
+      
+    });
         console.log("Добавляю пост...", { description, imageUrl });
         goToPage(POSTS_PAGE);
       },
-    });
+    })
+    
   }
 
   if (page === POSTS_PAGE) {

@@ -3,6 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
 import { addLike, disLike, getPosts } from '../api.js';
 import { formatDistanceToNow } from "date-fns";
+import { ru } from "date-fns/locale";
 
 export let postId;
 
@@ -10,6 +11,7 @@ export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
 
  console.log("Актуальный список постов:", posts);
+ 
  
 
  
@@ -31,7 +33,7 @@ export function renderPostsPageComponent({ appEl }) {
       imageUrl: post.imageUrl,
       description: post.description,
       userLogin: post.user.login,
-      //date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
+      date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
       likes: post.likes,
       isLiked: post.isLiked,
       id: post.id,
