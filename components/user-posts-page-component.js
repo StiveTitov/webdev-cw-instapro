@@ -1,30 +1,13 @@
-import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
-import { addLike, disLike, getPosts } from '../api.js';
+import { posts, setPosts, getToken, renderApp, userId } from "../index.js";
+import { addLike, disLike, getPostsUser } from '../api.js';
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
 
 export let postId;
 
-export function renderPostsPageComponent({ appEl }) {
-  // TODO: реализовать рендер постов из api
+export function renderUserPostsPageComponent({ appEl }) {
 
- console.log("Актуальный список постов:", posts);
- 
- 
-
- 
-
- 
-
-
-
-  /**
-   * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-   * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-   */
-  
   const appPosts = posts.map((post) => {
     return {
       userImageUrl: post.user.imageUrl,
@@ -97,10 +80,12 @@ export function renderPostsPageComponent({ appEl }) {
               posts[index].isLiked = false;
             })
             .then(() => {
-              getPosts({ token: getToken() })
+              getPostsUser({token: getToken(), userId})
                 .then((response) => {
+                  
                   setPosts(response);
                   likeButton.classList.remove("shake-bottom");
+                  
                   renderApp();
                 })
             })
@@ -111,10 +96,12 @@ export function renderPostsPageComponent({ appEl }) {
               posts[index].isLiked = true;
             })
             .then(() => {
-              getPosts({ token: getToken() })
+              getPostsUser({token: getToken(), userId})
                 .then((response) => {
+                  
                   setPosts(response);
                   likeButton.classList.remove("shake-bottom");
+                  
                   renderApp();
                 })
             })
@@ -125,17 +112,10 @@ export function renderPostsPageComponent({ appEl }) {
 
   likeEventListener();
 
-  renderHeaderComponent({
+
+renderHeaderComponent({
     element: document.querySelector(".header-container"),
   });
-
-  for (let userEl of document.querySelectorAll(".post-header")) {
-    userEl.addEventListener("click", () => {
-      goToPage(USER_POSTS_PAGE, {
-        userId: userEl.dataset.userId,
-      });
-    });
-  }
 
   
 }

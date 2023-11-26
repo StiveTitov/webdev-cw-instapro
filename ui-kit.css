@@ -91,6 +91,24 @@ p {
   background-color: #d8d7ff;
 }
 
+.img-description {
+  
+  height: 100px;
+  box-sizing: border-box;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgb(4, 18, 27);
+  border: none;
+  border-radius: 5px;
+  background-color: #e8e8e8;
+}
+
+.img-description .-error {
+  background-color: #fff;
+}
+
+
 .input {
   height: 36px;
   box-sizing: border-box;
